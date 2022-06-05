@@ -266,3 +266,183 @@ int main(){
     t3.display();
 }
 ```
+
+## Overloading using friend function:
+
+### Recap of friend function:
+
+```cpp
+#include<iostream>
+using namespace std;
+
+class test{
+    int a,b;
+    public:
+        void getdata(int a, int b){
+            this->a = a;
+            this->b = b;
+        };
+        friend void show(test t);
+};
+
+void show(test t){
+    cout<<t.a<<" "<<t.b<<endl;
+}
+
+int main(){
+    test t1,t2;
+    t1.getdata(2,3);
+    show(t1);
+}
+```
+
+### Unary minus overloading using friend function
+```cpp
+#include<iostream>
+using namespace std;
+
+class test{
+    int a,b,c;
+    public:
+        void getdata(int a, int b, int c){
+            this->a = a;
+            this->b = b;
+            this->c = c;
+        };
+        void display(){
+            cout<<a<<" "<<b<<" "<<c<<endl;
+        };
+        friend void operator -(test &t);
+};
+
+void operator -(test &t){ //address is passed as argument
+    t.a = -t.a;
+    t.b = -t.b;
+    t.c = -t.c;
+}
+
+int main(){
+    test t1;
+    t1.getdata(2,3,4);
+    t1.display();
+    -t1;
+    t1.display();
+}
+```
+
+### Arithmetic operator overloadin using friend function
+```cpp
+#include<iostream>
+using namespace std;
+
+class complex{
+    int real, img;
+    public:
+        void getdata(int real, int img){
+            this->real = real;
+            this->img = img;
+        };
+        void display(){
+            cout<<real<<" + "<<img<<"i"<<endl;
+        };
+        friend complex operator +(complex c1, complex c2);
+};
+
+complex operator +(complex c1, complex c2){
+    complex c;
+    c.real = c1.real + c2.real;
+    c.img = c1.img + c2.img;
+    return c;
+}
+
+int main(){
+    complex c1, c2, c3;
+    c1.getdata(2,3);
+    c2.getdata(3,4);
+    c3=c1+c2;
+    c3.display();
+}
+```
+
+### Post increment and pre increment using operator overloading
+```cpp
+#include<iostream>
+using namespace std;
+
+class test{
+    int a,b;
+    public:
+        void getdata(int a, int b){
+            this->a = a;
+            this->b = b;
+        };
+        void display(){
+            cout<<a<<" "<<b<<endl;
+        };
+        friend test operator ++(test &t, int);
+        friend test operator ++(test &t);
+};
+
+test operator ++(test &t, int){
+    test temp;
+    temp.a = t.a + 1;
+    temp.b = t.b + 1;
+    return temp;
+}
+
+test operator ++(test &t){
+    t.a = t.a + 1;
+    t.b = t.b + 1;
+    return t;
+}
+
+int main(){
+    test t1, t2;
+    t1.getdata(10,20);
+
+    t2 = ++t1;
+    t1.display();
+    t2.display();
+
+    test t3,t4;
+    t3.getdata(30,40);
+    t4=t3++;
+    t3.display();
+    t4.display();
+}
+```
+### String Concatenation using friend function:
+```cpp
+#include<iostream>
+#include<string.h>
+
+using namespace std;
+
+class test{
+    char a[20];
+    public:
+        void getdata(){
+            cout<<"Enter the string: ";
+            cin.getline(a, 20);
+        }
+        void display(){
+            cout<<a<<endl;
+        }
+        friend test operator +(test t1, test t2);
+};
+
+test operator +(test t1, test t2){
+    test res;
+    strcat(t1.a, t2.a);
+    strcpy(res.a, t1.a);
+    return res;
+}
+
+int main(){
+    test t1, t2;
+    t1.getdata();
+    t2.getdata();
+    test t3 = t1 + t2;
+    t3.display();
+}
+```
