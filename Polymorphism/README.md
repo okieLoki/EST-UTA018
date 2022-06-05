@@ -38,7 +38,7 @@ Poly means many and morph means forms. The word polymorphism means having many f
             virtual void function_name(parameters) = 0;
         -derived class has to be overriden.
 
-    > It is compulsory to override a pure virtual function in derived class.
+> It is compulsory to override a pure virtual function in derived class.
 
 ## Function overloading code:
 
