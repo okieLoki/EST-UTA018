@@ -42,7 +42,7 @@ Poly means many and morph means forms. The word polymorphism means having many f
 
 ## Function overloading code:
 
-```
+```cpp
 #include<iostream>
 using namespace std;
 
@@ -79,7 +79,7 @@ int main(){
 ```
 ## Function overriding code (using virtual function):
 
-```
+```cpp
 #include<iostream>
 using namespace std;
 
@@ -137,7 +137,7 @@ int main(){
 
 ## Function overrding (using pure virtual functions):
 
-```
+```cpp
 //pure virtual function
 
 #include<iostream>
